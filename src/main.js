@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initJourneyTimeline();
   initRevenueEngine();
   initBentoSpots();
-  initHeroConcepts();
+  initHeroCinematic();
   initAltitudeTracker();
 });
 
@@ -572,174 +572,127 @@ function initBentoSpots() {
   });
 }
 
-/* 7. INTERACTIVE HERO PROTOTYPES (Concepts A, B, C) */
-function initHeroConcepts() {
-  const hero = document.getElementById('hero');
-  const switcherBtns = document.querySelectorAll('.switch-btn');
+/* 7. CINEMATIC HERO INTRO SEQUENCE */
+function initHeroCinematic() {
   const headerNav = document.getElementById('main-header-nav');
-  if (!hero || switcherBtns.length === 0) return;
+  const counterText = document.getElementById('climb-counter-text');
+  const labelText = document.getElementById('climb-label-text');
+  const sublabelText = document.getElementById('climb-sublabel-text');
+  const taglineText = document.getElementById('climb-tagline-text');
+  const climbReveal = document.getElementById('climb-reveal-aniket');
+  const climbSequence = document.querySelector('.intro-sequence');
+  const scrollPrompt = document.getElementById('hero-scroll-prompt');
 
-  let activeIntervals = [];
+  if (!counterText) return;
 
-  function clearActiveAnimations() {
-    activeIntervals.forEach(clearInterval);
-    activeIntervals = [];
-    document.body.classList.remove('lock-scroll');
-    if (headerNav) headerNav.classList.remove('hidden');
-
-    // Reset Concept A elements
-    const counterText = document.getElementById('climb-counter-text');
-    const labelText = document.getElementById('climb-label-text');
-    const sublabelText = document.getElementById('climb-sublabel-text');
-    const climbReveal = document.getElementById('climb-reveal-aniket');
-    const climbSequence = document.querySelector('.climb-sequence');
-    const scrollPrompt = document.getElementById('hero-scroll-prompt');
-
-    if (counterText) {
-      counterText.textContent = "₹0";
-      counterText.classList.remove('vibrate', 'rhythm-pop');
-    }
-    if (labelText) labelText.style.opacity = '0';
-    if (sublabelText) sublabelText.style.opacity = '0';
-    if (climbReveal) {
-      climbReveal.style.display = 'none';
-      climbReveal.style.opacity = '0';
-    }
-    if (climbSequence) {
-      climbSequence.style.display = 'flex';
-      climbSequence.style.opacity = '1';
-    }
-    if (scrollPrompt) scrollPrompt.style.opacity = '1';
+  // Lock scroll and hide nav on boot
+  document.body.classList.add('lock-scroll');
+  if (headerNav) headerNav.classList.add('hidden');
+  if (scrollPrompt) {
+    scrollPrompt.style.opacity = '0';
+    scrollPrompt.style.transition = 'opacity 1s ease';
   }
 
-  function runConceptA() {
-    clearActiveAnimations();
+  const steps = [
+    "₹0",
+    "₹10,000",
+    "₹1 Lakh",
+    "₹10 Lakh",
+    "₹1 Cr",
+    "₹10 Cr",
+    "₹25 Cr",
+    "₹50 Cr",
+    "₹75+ Cr"
+  ];
 
-    // Lock scroll and hide nav
-    document.body.classList.add('lock-scroll');
-    if (headerNav) headerNav.classList.add('hidden');
+  let currentStep = 0;
 
-    const counterText = document.getElementById('climb-counter-text');
-    const labelText = document.getElementById('climb-label-text');
-    const sublabelText = document.getElementById('climb-sublabel-text');
-    const climbReveal = document.getElementById('climb-reveal-aniket');
-    const climbSequence = document.querySelector('.climb-sequence');
-    const scrollPrompt = document.getElementById('hero-scroll-prompt');
+  function renderNextStep() {
+    if (currentStep >= steps.length) {
+      // Counter finishes: stop vibration
+      counterText.classList.remove('vibrate');
 
-    if (scrollPrompt) scrollPrompt.style.opacity = '0';
+      // Pause for 800ms, then reveal label: "Revenue Influenced"
+      setTimeout(() => {
+        if (labelText) {
+          labelText.style.opacity = '1';
+          labelText.classList.add('rhythm-pop');
+        }
 
-    const steps = [
-      "₹0",
-      "₹10,000",
-      "₹1,00,000",
-      "₹10,00,000",
-      "₹1 Crore",
-      "₹10 Crore",
-      "₹25 Crore",
-      "₹50 Crore",
-      "₹75+ Crore"
-    ];
-
-    let currentStep = 0;
-
-    function renderNextStep() {
-      if (currentStep >= steps.length) {
-        // Stop vibration
-        counterText.classList.remove('vibrate');
-
-        // Pause, then reveal label
+        // Pause for 1000ms, then reveal sublabel: "Before Turning 21"
         setTimeout(() => {
-          if (labelText) {
-            labelText.style.opacity = '1';
-            labelText.classList.add('rhythm-pop');
+          if (sublabelText) {
+            sublabelText.style.opacity = '1';
+            sublabelText.classList.add('rhythm-pop');
           }
-          
-          // Pause, then reveal sublabel
+
+          // Pause for 1000ms, then reveal tagline: "Still Early."
           setTimeout(() => {
-            if (sublabelText) {
-              sublabelText.style.opacity = '1';
-              sublabelText.classList.add('rhythm-pop');
+            if (taglineText) {
+              taglineText.style.opacity = '1';
+              taglineText.classList.add('rhythm-pop');
             }
 
-            // Pause, then transition to Aniket's profile reveal
+            // Pause for 2000ms, then fade out the intro sequence and reveal the profile
             setTimeout(() => {
               if (climbSequence) {
                 climbSequence.style.opacity = '0';
-                setTimeout(() => {
-                  climbSequence.style.display = 'none';
-                  if (climbReveal) {
-                    climbReveal.style.display = 'flex';
-                    setTimeout(() => {
-                      climbReveal.style.opacity = '1';
-                      // Unlock scroll and reveal nav
-                      document.body.classList.remove('lock-scroll');
-                      if (headerNav) headerNav.classList.remove('hidden');
-                      if (scrollPrompt) scrollPrompt.style.opacity = '1';
-                    }, 50);
-                  }
-                }, 600);
               }
-            }, 1200);
 
-          }, 800);
+              // After fade-out animation completes (800ms), reveal the profile, navigation, and enable scroll
+              setTimeout(() => {
+                if (climbSequence) {
+                  climbSequence.style.display = 'none';
+                }
 
-        }, 800);
-        return;
-      }
+                if (climbReveal) {
+                  climbReveal.style.opacity = '1';
+                }
 
-      // Update counter text and vibration
-      counterText.textContent = steps[currentStep];
-      counterText.classList.add('vibrate');
-      
-      // Rhythm pop animation reset
-      counterText.classList.remove('rhythm-pop');
-      void counterText.offsetWidth; // Trigger reflow
-      counterText.classList.add('rhythm-pop');
+                if (headerNav) {
+                  headerNav.classList.remove('hidden');
+                  // Trigger a browser reflow to ensure the transition is smooth
+                  void headerNav.offsetWidth;
+                  headerNav.style.opacity = '1';
+                }
 
-      // Setup dynamic delays for build-up tension
-      let delay = 250;
-      if (currentStep === 0) delay = 400;
-      else if (currentStep > 4) delay = 350 + (currentStep - 4) * 80;
+                if (scrollPrompt) {
+                  scrollPrompt.style.opacity = '1';
+                }
 
-      currentStep++;
-      const timer = setTimeout(renderNextStep, delay);
-      activeIntervals.push(timer);
+                document.body.classList.remove('lock-scroll');
+              }, 800);
+
+            }, 2000);
+
+          }, 1000);
+
+        }, 1000);
+
+      }, 800);
+      return;
     }
 
-    // Begin count build sequence
-    const initialTimer = setTimeout(renderNextStep, 500);
-    activeIntervals.push(initialTimer);
+    // Update text
+    counterText.textContent = steps[currentStep];
+    counterText.classList.add('vibrate');
+
+    // Pop scale beat animation
+    counterText.classList.remove('rhythm-pop');
+    void counterText.offsetWidth; // trigger reflow
+    counterText.classList.add('rhythm-pop');
+
+    // Dynamic delay for count pace
+    let delay = 350;
+    if (currentStep === 0) delay = 800; // start slow
+    else if (currentStep > 4) delay = 350 + (currentStep - 4) * 85; // slow down towards target
+
+    currentStep++;
+    setTimeout(renderNextStep, delay);
   }
 
-  function runConceptB() {
-    clearActiveAnimations();
-  }
-
-  function runConceptC() {
-    clearActiveAnimations();
-  }
-
-  // Bind Switch Click Listeners
-  switcherBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      switcherBtns.forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-
-      const concept = e.target.getAttribute('data-concept');
-      hero.setAttribute('data-active-concept', concept);
-
-      if (concept === 'A') {
-        runConceptA();
-      } else if (concept === 'B') {
-        runConceptB();
-      } else if (concept === 'C') {
-        runConceptC();
-      }
-    });
-  });
-
-  // Run primary Concept A by default
-  runConceptA();
+  // Kick off counting sequence after a brief startup delay
+  setTimeout(renderNextStep, 800);
 }
 
 /* 8. EXPEDITION ALTITUDE INDICATOR */

@@ -1632,252 +1632,114 @@ a {
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.03);
 }
 
-/* 3. HERO INTERACTIVE SWITCHER */
-.hero-container-interactive {
-  position: relative;
-  overflow: hidden;
+/* 3. HERO CINEMATIC INTRO */
+.hero-cinematic-intro {
+  height: 100vh;
+  width: 100%;
   background-color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero-switcher {
-  position: absolute;
-  top: 6.5rem;
-  right: 3rem;
+.hero-intro-viewport {
+  width: 90%;
+  max-width: 900px;
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  z-index: 95;
-  background: rgba(10, 10, 15, 0.6);
-  border: 1px solid var(--border-color);
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  backdrop-filter: blur(8px);
-}
-
-.switcher-label {
-  font-size: 0.65rem;
-  color: var(--text-dark);
-  letter-spacing: 0.1em;
-}
-
-.switch-btn {
-  background: none;
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 2px;
-  cursor: pointer;
-  letter-spacing: 0.05em;
-  transition: all 0.2s ease;
-}
-
-.switch-btn:hover {
-  border-color: var(--text-muted);
-  color: var(--text-primary);
-}
-
-.switch-btn.active {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-  background: rgba(0, 240, 255, 0.05);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
-}
-
-/* 4. HERO CONCEPT WRAPPERS & STATES */
-.hero-concept-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  display: none;
   align-items: center;
   justify-content: center;
-  padding: 0 10%;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  position: relative;
+  height: 350px;
 }
 
-/* Toggle visibility via data attribute */
-.hero-container-interactive[data-active-concept="A"] #concept-a-wrapper {
-  display: flex;
-  opacity: 1;
-}
-
-.hero-container-interactive[data-active-concept="B"] #concept-b-wrapper {
-  display: flex;
-  opacity: 1;
-}
-
-.hero-container-interactive[data-active-concept="C"] #concept-c-wrapper {
-  display: flex;
-  opacity: 1;
-}
-
-/* 5. CONCEPT A: THE REVENUE CLIMB */
-.climb-sequence {
+.intro-sequence {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  opacity: 1;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.8s ease;
+  z-index: 10;
 }
 
-.climb-counter {
+.intro-counter {
   font-family: var(--font-display);
-  font-size: 8rem;
+  font-size: 8vw;
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.04em;
-  color: #fff;
-  margin-bottom: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
   text-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
 }
 
-.climb-label {
-  font-size: 0.9rem;
+.intro-label {
+  font-size: 1.1rem;
   letter-spacing: 0.3em;
-  color: var(--text-dark);
-  margin-bottom: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
 }
 
-.climb-sublabel {
-  font-size: 0.8rem;
+.intro-sublabel {
+  font-size: 0.95rem;
   letter-spacing: 0.25em;
   color: var(--accent-color);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
   text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
 }
 
-.climb-reveal {
-  display: none;
+.intro-tagline {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: #ffffff;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.intro-reveal-profile {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   opacity: 0;
-  transition: opacity 0.8s ease;
-  max-width: 800px;
+  transition: opacity 1s ease;
+  width: 100%;
+  z-index: 5;
 }
 
-.hero-title-small {
+.hero-name-heading {
   font-family: var(--font-display);
-  font-size: 4rem;
+  font-size: 5rem;
   font-weight: 900;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: #ffffff;
   text-transform: uppercase;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.hero-subtitle-small {
-  font-size: 1.25rem;
-  color: var(--text-muted);
-  font-weight: 300;
-  max-width: 500px;
+.hero-role-heading {
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
 }
 
-/* 6. CONCEPT B: THE QUESTION */
-.question-sequence {
-  max-width: 900px;
-  text-align: center;
-}
-
-.hero-question-title {
-  font-family: var(--font-display);
-  font-size: 4rem;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: #fff;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-  text-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
-}
-
-.hero-question-subtitle {
-  font-size: 0.75rem;
-  color: var(--text-dark);
-  letter-spacing: 0.2em;
-}
-
-/* 7. CONCEPT C: THE DOCUMENTARY OPENING */
-.doc-sequence {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-  width: 100%;
-  max-width: 1100px;
-}
-
-.doc-row {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.doc-year {
-  font-size: 4rem;
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 1.5rem;
-}
-
-.doc-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.doc-list li {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-}
-
-.doc-divider {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  height: 250px;
-}
-
-.divider-line {
-  width: 1px;
-  flex-grow: 1;
-  background-color: var(--border-color);
-}
-
-.vs-badge {
-  font-size: 0.7rem;
-  color: var(--text-dark);
-  border: 1px solid var(--border-color);
-  padding: 0.3rem 0.5rem;
-  border-radius: 50%;
-}
-
-.doc-present .doc-list li {
-  color: #fff;
-}
-
-/* 8. ANIMATIONS FOR RHYTHM */
+/* 4. RHYTHM AND MOTION ANIMATIONS */
 @keyframes micro-vibrate {
   0% { transform: translate(0, 0); }
   20% { transform: translate(-1px, 1px); }
