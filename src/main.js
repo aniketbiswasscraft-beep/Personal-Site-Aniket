@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initJourneyTimeline();
   initRevenueEngine();
   initBentoSpots();
+  initHeroConcepts();
+  initAltitudeTracker();
 });
 
 /* 1. AMBIENT DUST SIMULATION (2D Canvas) */
@@ -568,4 +570,206 @@ function initBentoSpots() {
       box.style.setProperty('--mouse-y', `${y}px`);
     });
   });
+}
+
+/* 7. INTERACTIVE HERO PROTOTYPES (Concepts A, B, C) */
+function initHeroConcepts() {
+  const hero = document.getElementById('hero');
+  const switcherBtns = document.querySelectorAll('.switch-btn');
+  const headerNav = document.getElementById('main-header-nav');
+  if (!hero || switcherBtns.length === 0) return;
+
+  let activeIntervals = [];
+
+  function clearActiveAnimations() {
+    activeIntervals.forEach(clearInterval);
+    activeIntervals = [];
+    document.body.classList.remove('lock-scroll');
+    if (headerNav) headerNav.classList.remove('hidden');
+
+    // Reset Concept A elements
+    const counterText = document.getElementById('climb-counter-text');
+    const labelText = document.getElementById('climb-label-text');
+    const sublabelText = document.getElementById('climb-sublabel-text');
+    const climbReveal = document.getElementById('climb-reveal-aniket');
+    const climbSequence = document.querySelector('.climb-sequence');
+    const scrollPrompt = document.getElementById('hero-scroll-prompt');
+
+    if (counterText) {
+      counterText.textContent = "₹0";
+      counterText.classList.remove('vibrate', 'rhythm-pop');
+    }
+    if (labelText) labelText.style.opacity = '0';
+    if (sublabelText) sublabelText.style.opacity = '0';
+    if (climbReveal) {
+      climbReveal.style.display = 'none';
+      climbReveal.style.opacity = '0';
+    }
+    if (climbSequence) {
+      climbSequence.style.display = 'flex';
+      climbSequence.style.opacity = '1';
+    }
+    if (scrollPrompt) scrollPrompt.style.opacity = '1';
+  }
+
+  function runConceptA() {
+    clearActiveAnimations();
+
+    // Lock scroll and hide nav
+    document.body.classList.add('lock-scroll');
+    if (headerNav) headerNav.classList.add('hidden');
+
+    const counterText = document.getElementById('climb-counter-text');
+    const labelText = document.getElementById('climb-label-text');
+    const sublabelText = document.getElementById('climb-sublabel-text');
+    const climbReveal = document.getElementById('climb-reveal-aniket');
+    const climbSequence = document.querySelector('.climb-sequence');
+    const scrollPrompt = document.getElementById('hero-scroll-prompt');
+
+    if (scrollPrompt) scrollPrompt.style.opacity = '0';
+
+    const steps = [
+      "₹0",
+      "₹10,000",
+      "₹1,00,000",
+      "₹10,00,000",
+      "₹1 Crore",
+      "₹10 Crore",
+      "₹25 Crore",
+      "₹50 Crore",
+      "₹75+ Crore"
+    ];
+
+    let currentStep = 0;
+
+    function renderNextStep() {
+      if (currentStep >= steps.length) {
+        // Stop vibration
+        counterText.classList.remove('vibrate');
+
+        // Pause, then reveal label
+        setTimeout(() => {
+          if (labelText) {
+            labelText.style.opacity = '1';
+            labelText.classList.add('rhythm-pop');
+          }
+          
+          // Pause, then reveal sublabel
+          setTimeout(() => {
+            if (sublabelText) {
+              sublabelText.style.opacity = '1';
+              sublabelText.classList.add('rhythm-pop');
+            }
+
+            // Pause, then transition to Aniket's profile reveal
+            setTimeout(() => {
+              if (climbSequence) {
+                climbSequence.style.opacity = '0';
+                setTimeout(() => {
+                  climbSequence.style.display = 'none';
+                  if (climbReveal) {
+                    climbReveal.style.display = 'flex';
+                    setTimeout(() => {
+                      climbReveal.style.opacity = '1';
+                      // Unlock scroll and reveal nav
+                      document.body.classList.remove('lock-scroll');
+                      if (headerNav) headerNav.classList.remove('hidden');
+                      if (scrollPrompt) scrollPrompt.style.opacity = '1';
+                    }, 50);
+                  }
+                }, 600);
+              }
+            }, 1200);
+
+          }, 800);
+
+        }, 800);
+        return;
+      }
+
+      // Update counter text and vibration
+      counterText.textContent = steps[currentStep];
+      counterText.classList.add('vibrate');
+      
+      // Rhythm pop animation reset
+      counterText.classList.remove('rhythm-pop');
+      void counterText.offsetWidth; // Trigger reflow
+      counterText.classList.add('rhythm-pop');
+
+      // Setup dynamic delays for build-up tension
+      let delay = 250;
+      if (currentStep === 0) delay = 400;
+      else if (currentStep > 4) delay = 350 + (currentStep - 4) * 80;
+
+      currentStep++;
+      const timer = setTimeout(renderNextStep, delay);
+      activeIntervals.push(timer);
+    }
+
+    // Begin count build sequence
+    const initialTimer = setTimeout(renderNextStep, 500);
+    activeIntervals.push(initialTimer);
+  }
+
+  function runConceptB() {
+    clearActiveAnimations();
+  }
+
+  function runConceptC() {
+    clearActiveAnimations();
+  }
+
+  // Bind Switch Click Listeners
+  switcherBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      switcherBtns.forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+
+      const concept = e.target.getAttribute('data-concept');
+      hero.setAttribute('data-active-concept', concept);
+
+      if (concept === 'A') {
+        runConceptA();
+      } else if (concept === 'B') {
+        runConceptB();
+      } else if (concept === 'C') {
+        runConceptC();
+      }
+    });
+  });
+
+  // Run primary Concept A by default
+  runConceptA();
+}
+
+/* 8. EXPEDITION ALTITUDE INDICATOR */
+function initAltitudeTracker() {
+  const fillBar = document.getElementById('altitude-fill-bar');
+  const markerDot = document.getElementById('altitude-marker-dot');
+  const valueText = document.getElementById('altitude-value-text');
+  if (!fillBar || !markerDot || !valueText) return;
+
+  function updateAltitude() {
+    const documentH = document.documentElement.scrollHeight;
+    const viewportH = window.innerHeight;
+    const scrollY = window.scrollY;
+
+    const totalScrollable = documentH - viewportH;
+    if (totalScrollable <= 0) return;
+
+    // Calculate percentage scroll
+    const scrollPct = Math.max(0, Math.min(1, scrollY / totalScrollable));
+
+    // Update UI elements
+    fillBar.style.height = `${scrollPct * 100}%`;
+    markerDot.style.top = `${scrollPct * 100}%`;
+
+    // Map percentage to Mount Everest Summit altitude (0m to 8848m)
+    const altitude = Math.round(scrollPct * 8848);
+    valueText.textContent = `${altitude.toLocaleString()}m`;
+  }
+
+  window.addEventListener('scroll', updateAltitude);
+  window.addEventListener('resize', updateAltitude);
+  updateAltitude();
 }

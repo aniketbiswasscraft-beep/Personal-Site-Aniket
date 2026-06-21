@@ -20,8 +20,20 @@
     <!-- Custom Cursor Glow -->
     <div id="cursor-glow" class="cursor-glow"></div>
 
+    <!-- Cinematic Altitude/Expedition Tracker -->
+    <div class="altitude-tracker font-mono">
+      <div class="altitude-line">
+        <div class="altitude-fill" id="altitude-fill-bar"></div>
+        <div class="altitude-marker" id="altitude-marker-dot"></div>
+      </div>
+      <div class="altitude-label">
+        <span class="alt-title">ALTITUDE</span>
+        <span class="alt-value" id="altitude-value-text">0m</span>
+      </div>
+    </div>
+
     <!-- Top Navigation -->
-    <header class="header-nav animate-in">
+    <header class="header-nav animate-in" id="main-header-nav">
       <div class="logo">
         <a href="#hero" id="nav-logo">ANIKET BISWAS <span class="logo-sub">/ GROWTH OPERATOR</span></a>
       </div>
@@ -36,30 +48,85 @@
     <!-- MAIN NARRATIVE SHELL -->
     <main class="narrative-container">
       
-      <!-- SECTION 1: HERO -->
-      <section id="hero" class="hero-section">
-        <div class="hero-center">
-          <div class="meta-label mono-label animate-fade">01. INQUIRY</div>
-          <h1 class="hero-title animate-text">
-            <span>WHAT HAPPENS</span>
-            <span>WHEN CURIOSITY</span>
-            <span class="electric-glow">COMPOUNDS?</span>
-          </h1>
-          <p class="hero-subtitle animate-fade-delay">
-            An inquiry into why some businesses grow while others don't. A record of compounding curiosity, ad spend, and clean execution.
-          </p>
+      <!-- SECTION 1: HERO CONTAINER -->
+      <section id="hero" class="hero-section hero-container-interactive" data-active-concept="A">
+        <!-- Floating scene switcher -->
+        <div class="hero-switcher font-mono">
+          <span class="switcher-label">SCENE SELECTOR //</span>
+          <button class="switch-btn active" data-concept="A">CONCEPT A (REC)</button>
+          <button class="switch-btn" data-concept="B">CONCEPT B</button>
+          <button class="switch-btn" data-concept="C">CONCEPT C</button>
         </div>
-        <div class="scroll-prompt animate-fade-delay">
+
+        <!-- CONCEPT A: THE REVENUE CLIMB -->
+        <div class="hero-concept-wrapper" id="concept-a-wrapper">
+          <div class="climb-sequence">
+            <div class="climb-counter font-mono" id="climb-counter-text">₹0</div>
+            <div class="climb-label font-mono" id="climb-label-text">REVENUE INFLUENCED</div>
+            <div class="climb-sublabel font-mono" id="climb-sublabel-text">BEFORE TURNING 21</div>
+          </div>
+          <div class="climb-reveal" id="climb-reveal-aniket">
+            <div class="meta-label font-mono">// INITIALIZING NARRATIVE // [COORD -- 22.5726° N, 88.3639° E // ELEV 0M]</div>
+            <h1 class="hero-title-small">ANIKET BISWAS</h1>
+            <p class="hero-subtitle-small">An inquiry into scale, compounding ad spend, and continuous curiosity.</p>
+          </div>
+        </div>
+
+        <!-- CONCEPT B: THE QUESTION -->
+        <div class="hero-concept-wrapper" id="concept-b-wrapper">
+          <div class="question-sequence">
+            <div class="meta-label font-mono">// INITIALIZING INQUIRY // ELEV 0M</div>
+            <h1 class="hero-question-title">How Much Can Obsession Change In Three Years?</h1>
+            <p class="hero-question-subtitle font-mono">// SCROLL TO UNCOVER THE NARRATIVE</p>
+          </div>
+        </div>
+
+        <!-- CONCEPT C: THE DOCUMENTARY OPENING -->
+        <div class="hero-concept-wrapper" id="concept-c-wrapper">
+          <div class="doc-sequence">
+            <div class="doc-row doc-past">
+              <div class="doc-year font-mono">2023.</div>
+              <ul class="doc-list font-mono">
+                <li>&gt; Learning Google Ads</li>
+                <li>&gt; No Clients</li>
+                <li>&gt; No Team</li>
+                <li>&gt; No Idea What I Was Doing</li>
+              </ul>
+            </div>
+            <div class="doc-row doc-divider">
+              <div class="divider-line"></div>
+              <div class="vs-badge font-mono">VS</div>
+              <div class="divider-line"></div>
+            </div>
+            <div class="doc-row doc-present">
+              <div class="doc-year font-mono electric-glow-text">2026.</div>
+              <ul class="doc-list font-mono">
+                <li>&gt; 75+ Cr Revenue Influenced</li>
+                <li>&gt; 7+ Cr Ad Spend Managed</li>
+                <li>&gt; 25+ Brands Worked With</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-prompt animate-fade-delay" id="hero-scroll-prompt">
           <span class="scroll-dot"></span>
           <span class="scroll-text">SCROLL TO UNCOVER</span>
         </div>
       </section>
+
+      <!-- UNRESOLVED INQUIRY -->
+      <div class="unresolved-question-wrapper text-center font-mono">
+        <span class="question-prefix">// CURIOSITY LOOP</span>
+        <h3 class="inquiry-question">What happens when small experiments compound?</h3>
+      </div>
 
       <!-- IMAGE CHAPTER 01: SUNRISE / POTENTIAL -->
       <section class="cinematic-chapter" id="image-chapter-1">
         <div class="cinematic-bg" style="background-image: url('/src/assets/chapter_sunrise_ridge.png');"></div>
         <div class="cinematic-overlay"></div>
         <div class="cinematic-content">
+          <div class="cinematic-coordinate font-mono">[COORD // 22.5726° N, 88.3639° E // ELEV 800M]</div>
           <h2 class="cinematic-quote">Still Learning.</h2>
           <p class="cinematic-meta font-mono">// CHAPTER 01 // POTENTIAL & TRAJECTORY</p>
         </div>
@@ -70,6 +137,7 @@
         <div class="numbers-wall-sticky">
           <!-- Slide Container -->
           <div class="numbers-wall-viewport">
+            <div class="section-coordinate-fixed font-mono">[COORD // BASE CAMP // ELEV 1200M]</div>
             
             <!-- Slide 1 -->
             <div class="num-slide active" id="metric-slide-1">
@@ -128,7 +196,7 @@
       <section id="journey" class="journey-section">
         <div class="section-container">
           <div class="section-header">
-            <div class="meta-label">02. CHRONOLOGY</div>
+            <div class="meta-label">02. CHRONOLOGY // [COORD // ICEFALL TRAIL // ELEV 3400M]</div>
             <h2 class="section-title">THE STORY UNFOLDING</h2>
             <p class="section-desc text-muted">A timeline of risk, constant learning, and practical marketing economics.</p>
           </div>
@@ -262,6 +330,7 @@
         <div class="cinematic-bg" style="background-image: url('/src/assets/chapter_ocean_walk.png');"></div>
         <div class="cinematic-overlay"></div>
         <div class="cinematic-content">
+          <div class="cinematic-coordinate font-mono">[COORD // REFLECTION POINT // ELEV 4200M]</div>
           <h2 class="cinematic-quote">Curiosity Has Taken Me Further<br>Than Certainty Ever Could.</h2>
           <p class="cinematic-meta font-mono">// CHAPTER 02 // CURIOSITY & EXPLORATION</p>
         </div>
@@ -281,6 +350,7 @@
         <div class="cinematic-bg" style="background-image: url('/src/assets/chapter_late_night_glow.png');"></div>
         <div class="cinematic-overlay"></div>
         <div class="cinematic-content">
+          <div class="cinematic-coordinate font-mono">[COORD // OBSERVATION COORDS // ELEV 5100M]</div>
           <h2 class="cinematic-quote">Most Growth Lessons Don't Come From Courses.</h2>
           <p class="cinematic-meta font-mono">// CHAPTER 03 // OBSESSION & CRAFT</p>
         </div>
@@ -290,7 +360,7 @@
       <section id="revenue-engine" class="revenue-engine-section">
         <div class="section-container">
           <div class="section-header">
-            <div class="meta-label">03. PERFORMANCE MODELING</div>
+            <div class="meta-label">03. PERFORMANCE MODELING // [COORD // TELEMETRY CAMP // ELEV 5600M]</div>
             <h2 class="section-title">THE REVENUE ENGINE</h2>
             <p class="section-desc text-muted">A live simulation of high-velocity growth modeling and ad spend allocation. Change the sliders below to see how key performance variables interact.</p>
           </div>
@@ -412,7 +482,7 @@
       <section id="case-studies" class="case-studies-section">
         <div class="section-container">
           <div class="section-header">
-            <div class="meta-label">04. RECOLLECTIONS</div>
+            <div class="meta-label">04. RECOLLECTIONS // [COORD // ADVANCED CAMP // ELEV 6800M]</div>
             <h2 class="section-title">STORIES OF GROWTH & LESSONS</h2>
             <p class="section-desc text-muted">A narrative record of real campaigns, mistakes, and the growth that followed.</p>
           </div>
@@ -484,12 +554,21 @@
         </div>
       </section>
 
-      <!-- PHILOSOPHY MOMENT 03: THE SOUL OF GROWTH -->
+      <!-- PHILOSOPHY MOMENT 03: ATTENTION ARBITRAGE -->
       <section class="philosophy-moment" id="philosophy-moment-3">
         <div class="philosophy-glow"></div>
         <div class="philosophy-content">
+          <p class="philosophy-statement">Scale is not about spending more.<br>It is about understanding where attention flows.</p>
+          <p class="philosophy-tag font-mono">// BELIEF 03 // ATTENTION ARBITRAGE</p>
+        </div>
+      </section>
+
+      <!-- PHILOSOPHY MOMENT 04: THE SOUL OF GROWTH -->
+      <section class="philosophy-moment" id="philosophy-moment-4">
+        <div class="philosophy-glow"></div>
+        <div class="philosophy-content">
           <p class="philosophy-statement">The goal was never ads.<br>The goal was understanding what makes things grow.</p>
-          <p class="philosophy-tag font-mono">// BELIEF 03 // UNDERLYING SYSTEM</p>
+          <p class="philosophy-tag font-mono">// BELIEF 04 // UNDERLYING SYSTEM</p>
         </div>
       </section>
 
@@ -497,8 +576,8 @@
       <section id="operating-system" class="os-section">
         <div class="section-container">
           <div class="section-header">
-            <div class="meta-label">05. THE SETUP</div>
-            <h2 class="section-title">THE OPERATING SYSTEM</h2>
+            <div class="meta-label">05. THE SETUP // [COORD // THE HIGH RIDGE // ELEV 7900M]</div>
+            <h2 class="section-title">EXPERIMENTAL LOGS</h2>
             <p class="section-desc text-muted">A representation of the frameworks, data tools, and mental inputs that feed the growth process.</p>
           </div>
 
@@ -591,15 +670,27 @@
         <div class="cinematic-bg" style="background-image: url('/src/assets/chapter_open_road.png');"></div>
         <div class="cinematic-overlay"></div>
         <div class="cinematic-content">
+          <div class="cinematic-coordinate font-mono">[COORD // VIEWPOINT ROAD // ELEV 8400M]</div>
           <h2 class="cinematic-quote">Just Getting Started.</h2>
           <p class="cinematic-meta font-mono">// CHAPTER 04 // THE HORIZON</p>
+        </div>
+      </section>
+
+      <!-- PHILOSOPHY MOMENT 05: THE STUDENT SPIRIT -->
+      <section class="philosophy-moment" id="philosophy-moment-5">
+        <div class="philosophy-glow"></div>
+        <div class="philosophy-content">
+          <p class="philosophy-statement">Growth is one of the few games<br>where you never stop being a student.</p>
+          <p class="philosophy-tag font-mono">// BELIEF 05 // LIFELONG PRACTICE</p>
         </div>
       </section>
 
       <!-- SECTION 7: CONTACT (The Final Chapter) -->
       <section id="contact" class="contact-section">
         <div class="contact-card">
-          <div class="meta-label text-center">06. THE NEXT LEAP</div>
+          <div class="meta-label text-center">06. THE NEXT LEAP // [COORD // THE SUMMIT // ELEV 8848M]</div>
+          <div class="question-resolution font-mono text-center" style="letter-spacing: 0.2em; color: var(--accent-color); margin-bottom: 0.8rem; font-size: 0.75rem;">// NARRATIVE RESOLUTION</div>
+          <div class="answer-statement text-center" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-primary); margin-bottom: 2rem;">Compounding small experiments daily rewrites the trajectory.</div>
           <h2 class="contact-title text-center">Let's Build Something<br><span class="electric-glow">Worth Talking About.</span></h2>
           <p class="contact-subtitle text-center">
             Vetting growth consultation roles, full-time marketing partnerships, and performance scaling partnerships.
