@@ -1883,3 +1883,200 @@ body.lock-scroll {
     padding: 2rem 1.5rem;
   }
 }
+
+/* PHOTO PLACEHOLDER SYSTEM */
+.photo-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #07070a;
+  border: 1px dashed var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center;
+}
+
+.photo-placeholder::before {
+  content: '[' attr(data-category) ' placeholder ]';
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+/* Corner Crosshair Decoration */
+.photo-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  opacity: 0.5;
+  transition: border-color 0.3s ease;
+}
+
+.photo-placeholder:hover {
+  border-color: rgba(0, 240, 255, 0.4);
+  background-color: rgba(0, 240, 255, 0.01);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
+}
+
+.photo-placeholder:hover::before {
+  color: var(--accent-color);
+}
+
+.photo-placeholder:hover::after {
+  border-color: rgba(0, 240, 255, 0.1);
+}
+
+/* Bento box visual spacing adjustments */
+.bento-box .photo-placeholder {
+  aspect-ratio: 2.39 / 1; /* ultra-wide visual break inside bento */
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+/* REAL ARTIFACT SYSTEM */
+.artifacts-subheader {
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 4rem;
+}
+
+.artifacts-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.artifacts-desc {
+  font-size: 1rem;
+  max-width: 600px;
+}
+
+.artifacts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.artifact-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.artifact-meta {
+  font-size: 0.65rem;
+  color: var(--text-dark);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.artifact-image-container {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: #040406;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.artifact-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.1) brightness(0.7);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.artifact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.artifact-tag {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.artifact-caption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+/* Artifact Card Interactive States */
+.artifact-card:hover {
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.05);
+}
+
+.artifact-card:hover .artifact-meta {
+  color: var(--accent-color);
+}
+
+.artifact-card:hover .artifact-img {
+  filter: grayscale(0.2) contrast(1) brightness(0.9);
+  transform: scale(1.03);
+}
+
+.artifact-card:hover .artifact-caption {
+  color: var(--text-primary);
+}
+
+/* Responsive fixes for artifacts */
+@media (max-width: 1024px) {
+  .artifacts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .artifacts-grid {
+    grid-template-columns: 1fr;
+  }
+  .artifacts-subheader {
+    margin-top: 4rem;
+    padding-top: 3rem;
+  }
+  .artifacts-title {
+    font-size: 1.8rem;
+  }
+}
