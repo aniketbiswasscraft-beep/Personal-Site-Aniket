@@ -518,15 +518,14 @@ function initRevenueEngine() {
   // 6. Live log logs ticking pipeline
   const ticker = document.getElementById('terminal-ticker');
   const logEvents = [
-    'SYSTEM_LOAD: NORMAL',
-    'META_API: SUCCESS - Creative node deployed successfully',
-    'CAPI_STREAM: Conversions API signals capturing (+18.4% Attribution)',
-    'AD_ACCOUNT: PURGE Creative fatigue indexes below 1.2% CTR',
-    'BUDGET_DISPATCH: Target scale set to ₹4.5L/d on primary DTC_Portfolio',
-    'ROI_SYNCHRONIZER: Recalibrating cohort target parameters',
-    'AUDIENCE_MATRIX: Stable lookalike matrices scaling at 2% bounds',
-    'CREATIVE_SCHEDULER: Rendering 12 new iterations programmatically',
-    'INTEGRATION: BigQuery synchronizer completed attribution cycle',
+    'META_API: Budget scale adjusted on Cococart campaign',
+    'GTM_SERVER: Conversions API signals matching (+18% signal calibration)',
+    'CREATIVE_AUDIT: Paused fatigued ad variations (CTR below 1.2%)',
+    'ASSET_DEPLOY: Uploaded 12 new visual hooks for Moon Store testing',
+    'ATTRIBUTION: Syncing GA4 blended contribution margins',
+    'OPTIMIZATION: Bid values adjusted on DTC lifestyle accounts',
+    'LANDING_PAGE: Core conversion rates stable at 3.82%',
+    'COHERENCE: 60 ad accounts connected and pacing normally',
   ];
   
   if (ticker) {

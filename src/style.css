@@ -448,6 +448,63 @@ a {
   transition: height 0.1s linear;
 }
 
+/* HUMANITY IMAGE BREAK MOMENTS */
+.humanity-break {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.humanity-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
+  z-index: 1;
+}
+
+.humanity-content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+  padding: 0 3rem;
+}
+
+.humanity-quote {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.humanity-author {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 768px) {
+  .humanity-break {
+    height: 60vh;
+  }
+  .humanity-quote {
+    font-size: 1.8rem;
+  }
+}
+
 /* SECTION 3: THE JOURNEY (Chapters) */
 .journey-section {
   background-color: var(--bg-color);
